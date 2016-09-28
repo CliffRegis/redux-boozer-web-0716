@@ -1,11 +1,20 @@
 import React from 'react';
+import {Link} from 'react-router'
+import {connect} from 'react-redux'
 
-const CocktailsShow = function(){
+ 
+const CocktailsShow = function(props){
 	return (
 		<div>
-		cocktail show page
+		 {props.cocktail.name}
 		</div>
 		)
 }
 
-export default CocktailsShow;
+function mapStateToProps(state, ownProps){
+    const cocktail = state.cocktails.find((cocktail) => {return cocktail.id == ownProps.params.id})
+	 	return {cocktail: cocktail}
+}
+
+const componentCreator = connect(mapStateToProps)
+export default componentCreator(CocktailsShow);
